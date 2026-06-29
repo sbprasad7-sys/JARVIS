@@ -15,7 +15,7 @@ class AppLauncher:
             "notepad": "notepad",
             "calculator": "calc",
             "paint": "mspaint",
-            "cmd": "cmd"
+            "cmd": "cmd.exe"
         }
 
         if app_name in apps:
