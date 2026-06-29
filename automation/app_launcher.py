@@ -1,7 +1,11 @@
 import subprocess
+from automation.browser import WebsiteLauncher
 
 
 class AppLauncher:
+
+    def __init__(self):
+        self.website_launcher = WebsiteLauncher()
 
     def open_app(self, app_name):
         app_name = app_name.lower()
@@ -18,4 +22,5 @@ class AppLauncher:
             print(f"Opening {app_name}...")
             subprocess.Popen(apps[app_name])
         else:
-            print(f"Sorry, I don't know how to open '{app_name}'.")
+            if not self.website_launcher.open_website(app_name):
+                print(f"Sorry, I don't know how to open '{app_name}'.")
