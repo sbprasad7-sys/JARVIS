@@ -1,31 +1,18 @@
-from datetime import datetime
+from jarvis.commands.system import execute as system_execute
+from jarvis.commands.web import execute as web_execute
+from jarvis.commands.apps import execute as apps_execute
 
 
 def process(command: str) -> str:
-    command = command.lower().strip()
+    command = command.strip()
 
-    if command == "hello":
-        return "Hello! How can I help you?"
+    for handler in (
+        system_execute,
+        apps_execute,
+        web_execute,
+    ):
+        response = handler(command)
+        if response:
+            return response
 
-    elif command == "who are you":
-        return "I am JARVIS, your personal AI assistant."
-
-    elif command == "time":
-        return f"The current time is {datetime.now().strftime('%I:%M %p')}"
-
-    elif command == "date":
-        return f"Today's date is {datetime.now().strftime('%d %B %Y')}"
-
-    elif command == "help":
-        return (
-            "Try these commands:\n"
-            "- hello\n"
-            "- who are you\n"
-            "- time\n"
-            "- date\n"
-            "- help\n"
-            "- exit"
-        )
-
-    else:
-        return "Sorry, I don't understand that command yet."
+    return "Sorry, I don't understand that command yet."
